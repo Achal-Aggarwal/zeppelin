@@ -117,6 +117,10 @@ if [[ -z "${ZEPPELIN_INTP_MEM}" ]]; then
   export ZEPPELIN_INTP_MEM="-Xms1024m -Xmx1024m -XX:MaxPermSize=512m"
 fi
 
+if [[ -n "${KRB5_CONFIG}" ]]; then
+  export ZEPPELIN_INTP_JAVA_OPTS+=" -Djava.security.krb5.conf=${KRB5_CONFIG}"
+fi
+
 JAVA_OPTS+=" ${ZEPPELIN_JAVA_OPTS} -Dfile.encoding=${ZEPPELIN_ENCODING} ${ZEPPELIN_MEM}"
 JAVA_OPTS+=" -Dlog4j.configuration=file://${ZEPPELIN_CONF_DIR}/log4j.properties"
 export JAVA_OPTS
